@@ -28,16 +28,16 @@
     -std::system("cls"), std::system("pouse") 등 시스템 명령어를 활용하여 콘솔 환경의 사용자 경험(UX)을 개선했습니다.
 
 4. 배운 점 및 응용
-    메모리 누수(Memory Leak)의 위험성: new[]로 할당한 char* 멤버 변수(title, author)를 소멸자(~Book)에서 delete[]로 해제하지 않으면 심각한 메모리 누수가 발생한다는 것을 직접 디버깅하며 배웠습니다.
-    동적 자원 관리의 중요성 (Rule of Three): 동적 메모리를 다루는 클래스(Book)는 소멸자, 복사 생성자 등을 명시적으로 관리해야 함을 이해했습니다.
+    메모리 누수의 위험성: new[]로 할당한 char* 멤버 변수를 소멸자에서 delete[]로 해제하지 않으면 심각한 메모리 누수가 발생한다는 것을 직접 디버깅하며 배웠습니다.
+    동적 자원 관리의 중요성: 동적 메모리를 다루는 클래스는 소멸자, 복사 생성자 등을 명시적으로 관리해야 함을 이해했습니다.
     C++ 입출력 버퍼의 이해: cin >>과 cin.getline을 혼용할 때 발생하는 입력 버퍼 문제를 cin.ignore()로 해결하면서, 콘솔 I/O의 내부 동작 원리를 파악했습니다.
-    객체 지향적 설계: Book(데이터)과 BookContainer(관리)의 역할을 분리하면서 객체 지향의 관심사 분리(SoC) 원칙을 실습했습니다.
+    객체 지향적 설계: Book과 BookContainer의 역할을 분리하면서 객체 지향의 관심사 분리 원칙을 실습했습니다.
 
     Modern C++로의 전환:
     char* → std::string: C-Style 문자열(char*, strcpy, new[]/delete[])을 C++ 표준 라이브러리인 std::string으로 대체하여, 메모리 관리를 자동화하고 코드를 훨씬 간결하고 안전하게 만들고 싶습니다.
     Book* p[] → std::vector<std::unique_ptr<Book>>:
     std::vector: 100개 크기 제한이 있는 C-Style 배열 대신 std::vector를 사용하여 크기 제한이 없는 동적 컨테이너로 개선할 것입니다.
-    std::unique_ptr: Book* 원시 포인터 대신 스마트 포인터인 std::unique_ptr를 사용하면, ~BookContainer 소멸자에서 delete 코드를 작성할 필요 없이 자원이 자동으로 해제되도록(RAII) 구현할 수 있습니다.
+    std::unique_ptr: Book* 원시 포인터 대신 스마트 포인터인 std::unique_ptr를 사용하면, ~BookContainer 소멸자에서 delete 코드를 작성할 필요 없이 자원이 자동으로 해제되도록 구현할 수 있습니다.
 
     데이터 영속성 확보:
     현재는 프로그램 종료 시 모든 데이터가 사라집니다. 향후에는 도서 목록을 파일(CSV 또는 JSON)에 저장하고, 프로그램 시작 시 다시 불러오는 '파일 입출력' 기능을 응용하여 구현해 볼 계획입니다.
